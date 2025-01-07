@@ -1,0 +1,90 @@
+<ControlDiametrosScreen>:
+    name: "control_de_diametro"
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(10)
+        spacing: dp(10)
+
+        MDLabel:
+            text: "Diametro medido"
+            halign: 'center'
+            font_style: "H5"
+
+        MDTextField:
+            id: arriba_input
+            hint_text: "Arriba"
+            size_hint_y: None
+            height: dp(40)
+
+        MDTextField:
+            id: medio_input
+            hint_text: "Medio"
+            size_hint_y: None
+            height: dp(40)
+
+        MDTextField:
+            id: abajo_input
+            hint_text: "Abajo"
+            size_hint_y: None
+            height: dp(40)
+
+        MDTextField:
+            id: altura_input
+            hint_text: "Altura"
+            size_hint_y: None
+            height: dp(40)
+
+        # Check buttons (Mangueras, Hidraulico, Limpieza sector)
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing: dp(20)
+            size_hint_y: None
+            height: dp(40)
+
+            BoxLayout:
+                orientation: 'horizontal'
+                spacing: dp(5)
+                MDCheckbox:
+                    on_active: root.toggle_mangueras(self.active)
+                MDLabel:
+                    text: "Mangueras"
+                    halign: 'left'
+
+            BoxLayout:
+                orientation: 'horizontal'
+                spacing: dp(5)
+                MDCheckbox:
+                    on_active: root.toggle_hidraulico(self.active)
+                MDLabel:
+                    text: "Hidraulico"
+                    halign: 'left'
+
+            BoxLayout:
+                orientation: 'horizontal'
+                spacing: dp(5)
+                MDCheckbox:
+                    on_active: root.toggle_limpieza(self.active)
+                MDLabel:
+                    text: "Limpieza sector"
+                    halign: 'left'
+
+        # Menú desplegable para el nivel de agua
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {'center_x': 0.5}
+
+            MDDropDownItem:
+                id: nivel_agua_dropdown
+                text: "Nivel de agua"
+                pos_hint: {'center_x': 0.5}
+                on_release: root.open_nivel_agua_menu()
+
+        MDRaisedButton:
+            text: "Guardar datos"
+            pos_hint: {'center_x': 0.5}
+            size_hint_y: None
+            height: dp(40)
+            on_release: root.guardar_datos()

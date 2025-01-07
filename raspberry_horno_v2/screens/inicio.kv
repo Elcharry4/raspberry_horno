@@ -1,0 +1,115 @@
+# screens/inicio.kv
+
+<InicioScreen>:
+    name: 'inicio'
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: dp(20)
+        spacing: dp(20)
+
+        MDFlatButton:
+            text: "Control de Diámetros"
+            pos_hint: {"center_x": 0.5}
+            on_release:
+                app.root.current = "control_de_diametros"
+                app.root.transition.direction = "left"
+        MDLabel:
+            text: "Número de Colada"
+            font_style: "H5"
+            halign: 'center'
+            font_size: '18sp'
+
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_x: 0.8
+            height: dp(48)
+            pos_hint: {'center_x': 0.5}
+            spacing: dp(10)
+
+            MDIconButton:
+                icon: "minus"
+                user_font_size: "24sp"
+                size_hint: None, None
+                size: dp(48), dp(48)
+                on_release: root.decrementar_colada()
+
+            MDTextField:
+                id: colada_input
+                hint_text: "Número de colada"
+                mode: "rectangle"
+                multiline: False
+                size_hint_x: 1
+                halign: 'center'
+                text: root.numero_colada_formateado
+                readonly: True
+                font_size: '20sp'  # Aumentar el tamaño de fuente
+                text_color_normal: "black"
+
+            MDIconButton:
+                icon: "plus"
+                user_font_size: "24sp"
+                size_hint: None, None
+                size: dp(48), dp(48)
+                on_release: root.incrementar_colada()
+
+        MDLabel:
+            text: "Número de Crisol"
+            font_style: "H5"
+            halign: 'center'
+            font_size: '18sp'
+
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_x: 0.8
+            height: dp(48)
+            pos_hint: {'center_x': 0.5}
+            spacing: dp(10)
+
+            # Agregar un Widget invisible para ocupar el espacio del botón faltante
+            Widget:
+                size_hint: None, None
+                size: dp(48), dp(48)
+
+            MDTextField:
+                id: crisol_input
+                hint_text: "Número de crisol"
+                mode: "rectangle"
+                multiline: False
+                size_hint_x: 1
+                halign: 'center'
+                text: root.crisol
+                font_size: '20sp'  # Aumentar el tamaño de fuente
+                text_color_normal: "black"
+
+            MDIconButton:
+                icon: "restore"
+                user_font_size: "24sp"
+                size_hint: None, None
+                size: dp(48), dp(48)
+                on_release: root.reset_crisol()
+
+        MDLabel:
+            text: "Seleccione la Base"
+            font_style: "H5"
+            halign: 'center'
+            font_size: '18sp'  # Aumentar el tamaño de fuente
+
+        MDDropDownItem:
+            id: base_button
+            text: root.base_text
+            pos_hint: {'center_x': 0.5}
+            on_release: root.open_base_menu()
+            font_size: '30sp'  # Aumentar el tamaño de fuente
+            pos_hint: {'center_x': 0.5}
+
+        Widget:
+            size_hint_y: None
+            height: dp(20)
+
+        MDRaisedButton:
+            text: "Continuar"
+            size_hint_x: 0.6
+            pos_hint: {'center_x': 0.5}
+            on_release: root.continuar()
+            md_bg_color: app.theme_cls.accent_color

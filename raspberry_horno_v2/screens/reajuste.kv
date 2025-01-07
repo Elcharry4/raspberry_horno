@@ -1,0 +1,242 @@
+<ReajusteScreen>:
+    name: 'reajuste'
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: dp(20)
+        spacing: dp(20)
+
+        MDLabel:
+            id: temperatura_label
+            text: "Temperatura: -- °C"
+            halign: 'center'
+            font_style: 'H5'
+
+        MDLabel:
+            id: potencia_label
+            text: "Potencia: 0%"
+            halign: 'center'
+            font_style: 'H5'
+
+        MDSlider:
+            id: control_de_potencia
+            min: 0
+            max: 100
+            value: 0
+            on_value: root.on_potencia_value(self, self.value)
+
+        # Usamos un AnchorLayout para centrar horizontalmente los presets
+        AnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'center'
+            size_hint_y: None
+            height: dp(50)
+
+            GridLayout:
+                cols: 7
+                spacing: dp(10)
+                size_hint: None, None
+                height: dp(50)
+                # Calcula el ancho multiplicando el ancho de cada botón + spacing
+                # 7 botones * 70dp de ancho + 6 espacings * 10dp ~> 490 + 60 = 550 dp aprox.
+                width: dp(70)*7 + dp(10)*6
+
+                MDRaisedButton:
+                    text: "-5"
+                    size_hint: None, None
+                    width: dp(70)
+                    height: dp(50)
+                    md_bg_color: (1, 0, 0, 1)
+                    on_release: root.ajustar_potencia(-5)
+
+                MDRaisedButton:
+                    text: "25%"
+                    size_hint: None, None
+                    width: dp(70)
+                    height: dp(50)
+                    on_release: root.set_potencia(25)
+
+                MDRaisedButton:
+                    text: "50%"
+                    size_hint: None, None
+                    width: dp(70)
+                    height: dp(50)
+                    on_release: root.set_potencia(50)
+
+                MDRaisedButton:
+                    text: "75%"
+                    size_hint: None, None
+                    width: dp(70)
+                    height: dp(50)
+                    on_release: root.set_potencia(75)
+
+                MDRaisedButton:
+                    text: "100%"
+                    size_hint: None, None
+                    width: dp(70)
+                    height: dp(50)
+                    on_release: root.set_potencia(100)
+
+                MDRaisedButton:
+                    text: "Guardar Temperatura"
+                    size_hint: None, None
+                    width: dp(70)*2
+                    height: dp(50)
+                    on_release: root.guardar_temperatura()
+
+                MDRaisedButton:
+                    text: "+5"
+                    size_hint: None, None
+                    width: dp(70)
+                    height: dp(50)
+                    md_bg_color: (1, 0, 0, 1)
+                    on_release: root.ajustar_potencia(5)
+
+        MDLabel:
+            text: "REAJUSTE"
+            font_style: "H4"
+            halign: 'center'
+            text_color: 0, 0, 0, 1
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: dp(250)
+            pos_hint: {'center_x': 0.5}
+            padding: dp(10)
+            spacing: dp(10)
+
+            # Acero 1010
+            MDLabel:
+                text: "Acero 1010"
+                font_style: "H5"
+                halign: 'center'
+                text_color: 0, 0, 0, 1
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: dp(48)
+                spacing: dp(10)
+                pos_hint: {'center_x': 0.5}
+                size_hint_x: 0.8
+
+                MDIconButton:
+                    icon: "minus"
+                    size_hint: None, None
+                    width: dp(50)
+                    height: dp(50)
+                    icon_size: dp(40)
+                    on_release: root.decrementar_acero()
+
+                MDTextField:
+                    id: acero_input
+                    text: f"{root.acero_1010} KG"
+                    readonly: True
+                    font_size: '18sp'
+                    theme_text_color: "Custom"
+                    text_color: 0, 0, 0, 1
+                    halign: 'center'
+                    text_color_normal: "black"
+
+                MDIconButton:
+                    icon: "plus"
+                    size_hint: None, None
+                    width: dp(50)
+                    height: dp(50)
+                    icon_size: dp(40)
+                    on_release: root.incrementar_acero()
+
+            # Carbono
+            MDLabel:
+                text: "Carbono"
+                font_style: "H5"
+                halign: 'center'
+                text_color: 0, 0, 0, 1
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: dp(48)
+                spacing: dp(10)
+                pos_hint: {'center_x': 0.5}
+                size_hint_x: 0.8
+
+                MDIconButton:
+                    icon: "minus"
+                    size_hint: None, None
+                    width: dp(50)
+                    height: dp(50)
+                    icon_size: dp(40)
+                    on_release: root.decrementar_carbono()
+
+                MDTextField:
+                    id: carbono_input
+                    text: f"{root.carbono} KG"
+                    readonly: True
+                    font_size: '18sp'
+                    theme_text_color: "Custom"
+                    text_color: 0, 0, 0, 1
+                    halign: 'center'
+                    text_color_normal: "black"
+
+                MDIconButton:
+                    icon: "plus"
+                    size_hint: None, None
+                    width: dp(50)
+                    height: dp(50)
+                    icon_size: dp(40)
+                    on_release: root.incrementar_carbono()
+
+            # Silicio
+            MDLabel:
+                text: "Silicio"
+                font_style: "H5"
+                halign: 'center'
+                text_color: 0, 0, 0, 1
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: dp(48)
+                spacing: dp(10)
+                pos_hint: {'center_x': 0.5}
+                size_hint_x: 0.8
+
+                MDIconButton:
+                    icon: "minus"
+                    size_hint: None, None
+                    width: dp(50)
+                    height: dp(50)
+                    icon_size: dp(40)
+                    on_release: root.decrementar_silicio()
+
+                MDTextField:
+                    id: silicio_input
+                    text: f"{root.silicio} KG"
+                    readonly: True
+                    font_size: '18sp'
+                    theme_text_color: "Custom"
+                    text_color: 0, 0, 0, 1
+                    halign: 'center'
+                    text_color_normal: "black"
+
+                MDIconButton:
+                    icon: "plus"
+                    size_hint: None, None
+                    width: dp(50)
+                    height: dp(50)
+                    icon_size: dp(40)
+                    on_release: root.incrementar_silicio()
+
+        Widget:
+            size_hint_y: None
+            height: dp(10)
+
+        MDRaisedButton:
+            text: "Continuar"
+            size_hint_x: 0.6
+            pos_hint: {'center_x': 0.5}
+            on_release: root.continuar()
+            md_bg_color: app.theme_cls.accent_color
+            font_size: '18sp'

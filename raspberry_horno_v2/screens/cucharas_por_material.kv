@@ -1,0 +1,127 @@
+<CucharasPorMaterialScreen>:
+    name: 'cucharas_por_material'
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(5)
+        spacing: dp(5)
+
+        # Parte superior
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(50)  # Un poco más alto
+            spacing: dp(5)
+
+            MDLabel:
+                id: temperatura_label
+                text: "Temperatura: -- °C"
+                halign: 'center'
+                # font_style: "Subtitle1"
+                # Vamos a hacerlo más grande
+                font_style: "H4"  # O usar font_size: '20sp'
+            
+            MDLabel:
+                id: potencia_label
+                text: "Potencia: 0%"
+                halign: 'center'
+                font_style: "H4"
+            
+            MDLabel:
+                text: "Cucharas: {}".format(root.cuchara_general_contador)
+                halign: 'center'
+                font_style: "H4"
+
+        MDSlider:
+            id: control_de_potencia
+            min: 0
+            max: 100
+            value: 0
+            on_value: root.on_potencia_value(self, self.value)
+            size_hint_y: None
+            height: dp(30)
+
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing: dp(5)
+
+            # Columna izquierda para presets
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_x: None
+                width: self.minimum_width
+                spacing: dp(10)
+                padding: dp(5)
+                # Centramos verticalmente el contenido:
+                pos_hint: {'center_y': 0.5}
+
+                MDRaisedButton:
+                    text: "-5"
+                    size_hint: None, None
+                    width: dp(70)
+                    height: dp(50)
+                    md_bg_color: (1, 0, 0, 1)  # Rojo
+                    on_release: root.ajustar_potencia(-5)
+
+                MDRaisedButton:
+                    text: "25%"
+                    size_hint: None, None
+                    width: dp(70)
+                    height: dp(50)
+                    on_release: root.set_potencia(25)
+
+                MDRaisedButton:
+                    text: "50%"
+                    size_hint: None, None
+                    width: dp(70)
+                    height: dp(50)
+                    on_release: root.set_potencia(50)
+
+                MDRaisedButton:
+                    text: "75%"
+                    size_hint: None, None
+                    width: dp(70)
+                    height: dp(50)
+                    on_release: root.set_potencia(75)
+
+                MDRaisedButton:
+                    text: "100%"
+                    size_hint: None, None
+                    width: dp(70)
+                    height: dp(50)
+                    on_release: root.set_potencia(100)
+                
+                MDRaisedButton:
+                    text: "+5"
+                    size_hint: None, None
+                    width: dp(70)
+                    height: dp(50)
+                    md_bg_color: (1, 0, 0, 1)  # Rojo
+                    on_release: root.ajustar_potencia(5)
+
+            # Columna derecha
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_x: 1
+                spacing: dp(5)
+
+                ScrollView:
+                    size_hint_y: 1
+                    do_scroll_y: True
+                    do_scroll_x: False
+
+                    BoxLayout:
+                        id: materiales_box
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(2)
+                        padding: dp(2)
+
+                # Botón Finalizar Colada centrado al final
+                MDRaisedButton:
+                    text: "Finalizar Colada"
+                    pos_hint: {'center_x': 0.5}
+                    size_hint_y: None
+                    height: dp(60)
+                    on_release: root.finalizar_colada()
