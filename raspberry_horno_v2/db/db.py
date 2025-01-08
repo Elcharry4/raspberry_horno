@@ -1,5 +1,3 @@
-# db/db.py
-
 import mysql.connector
 from mysql.connector import pooling
 import configparser
@@ -102,6 +100,28 @@ def update_record(table_name, record_id, data, callback):
         except Exception as e:
             print(f"Error al actualizar el registro en {table_name}: {e}")
             callback(False, e)
+        finally:
+            if cursor:
+                cursor.close()
+            if conn:
+                conn.close()
+    Thread(target=db_task).start()
+
+def fetch_last_records(table_name, limit, callback):
+    """Obtiene los últimos registros de una tabla."""
+    def db_task():
+        conn = None
+        cursor = None
+        try:
+            conn = get_connection()
+            cursor = conn.cursor()
+            query = f"SELECT * FROM {table_name} ORDER BY id DESC LIMIT {limit};"
+            cursor.execute(query)
+            results = cursor.fetchall()
+            callback(results, None)
+        except Exception as e:
+            print(f"Error al obtener los registros de {table_name}: {e}")
+            callback(None, e)
         finally:
             if cursor:
                 cursor.close()

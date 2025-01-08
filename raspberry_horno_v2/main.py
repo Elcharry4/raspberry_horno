@@ -16,6 +16,7 @@ from screens.inicio import InicioScreen
 from screens.reajuste import ReajusteScreen
 from screens.cucharas_por_material import CucharasPorMaterialScreen
 from screens.control_de_diametros import ControlDiametrosScreen
+from screens.sinterizado import SinterizadoScreen
 
 rate_limit = 1.0
 last_touch_time = 0.0
@@ -25,7 +26,6 @@ def global_touch_down_filter(window, touch):
     global last_touch_time, rate_limit
     current_time = time()
     diff = current_time - last_touch_time
-    # Mostrar debug
     if diff < rate_limit:
         return True
     last_touch_time = current_time
@@ -35,7 +35,6 @@ def global_mouse_down_filter(window, x, y, button, modifiers):
     global last_mouse_time, rate_limit
     current_time = time()
     diff = current_time - last_mouse_time
-    # Mostrar debug
     if diff < rate_limit:
         return True
     last_mouse_time = current_time
@@ -57,12 +56,14 @@ class MyApp(MDApp):
         Builder.load_file(os.path.join('screens', 'reajuste.kv'))
         Builder.load_file(os.path.join('screens', 'cucharas_por_material.kv'))
         Builder.load_file(os.path.join('screens', 'control_de_diametros.kv'))
+        Builder.load_file(os.path.join('screens', 'sinterizado.kv'))
 
         sm = MyScreenManager()
         sm.add_widget(InicioScreen(name='inicio'))
         sm.add_widget(ReajusteScreen(name='reajuste'))
         sm.add_widget(CucharasPorMaterialScreen(name='cucharas_por_material'))
         sm.add_widget(ControlDiametrosScreen(name='control_de_diametros'))
+        sm.add_widget(SinterizadoScreen(name='sinterizado'))
         return sm
 
 if __name__ == '__main__':

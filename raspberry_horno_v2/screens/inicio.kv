@@ -8,12 +8,25 @@
         padding: dp(20)
         spacing: dp(20)
 
-        MDFlatButton:
-            text: "Control de Diámetros"
-            pos_hint: {"center_x": 0.5}
-            on_release:
-                app.root.current = "control_de_diametros"
-                app.root.transition.direction = "left"
+        MDBoxLayout:
+            orientation: 'horizontal'
+            padding: dp(20)
+            spacing: dp(20)
+
+            MDRaisedButton:
+                text: "Control de Diámetros"
+                size_hint: None, None
+                size: dp(200), dp(50)
+                on_release:
+                    app.root.current = "control_de_diametros"
+                    app.root.transition.direction = "left"
+
+            MDRaisedButton:
+                text: "Sinterizado"
+                size_hint: None, None
+                size: dp(200), dp(50)
+                on_release: app.root.current = 'sinterizado'
+
         MDLabel:
             text: "Número de Colada"
             font_style: "H5"

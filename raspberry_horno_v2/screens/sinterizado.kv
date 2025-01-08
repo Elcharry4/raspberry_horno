@@ -1,0 +1,96 @@
+<SinterizadoScreen>:
+    name: 'sinterizado'
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(5)
+        spacing: dp(5)
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(50)
+            spacing: dp(5)
+
+            MDLabel:
+                id: temperatura_label
+                text: "Temperatura: -- °C"
+                halign: 'center'
+                font_style: "H4"
+            
+            MDLabel:
+                id: potencia_label
+                text: "Potencia: 0%"
+                halign: 'center'
+                font_style: "H4"
+
+        MDSlider:
+            id: control_de_potencia
+            min: 0
+            max: 100
+            value: 0
+            on_value: root.on_potencia_value(self, self.value)
+            size_hint_y: None
+            height: dp(30)
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(60)
+            spacing: dp(10)
+            padding: dp(5)
+
+            MDRaisedButton:
+                text: "-5"
+                size_hint: None, None
+                width: dp(70)
+                height: dp(50)
+                md_bg_color: (1, 0, 0, 1)
+                on_release: root.ajustar_potencia(-5)
+
+            MDRaisedButton:
+                text: "25%"
+                size_hint: None, None
+                width: dp(70)
+                height: dp(50)
+                on_release: root.set_potencia(25)
+
+            MDRaisedButton:
+                text: "50%"
+                size_hint: None, None
+                width: dp(70)
+                height: dp(50)
+                on_release: root.set_potencia(50)
+
+            MDRaisedButton:
+                text: "75%"
+                size_hint: None, None
+                width: dp(70)
+                height: dp(50)
+                on_release: root.set_potencia(75)
+
+            MDRaisedButton:
+                text: "100%"
+                size_hint: None, None
+                width: dp(70)
+                height: dp(50)
+                on_release: root.set_potencia(100)
+
+            MDRaisedButton:
+                text: "+5"
+                size_hint: None, None
+                width: dp(70)
+                height: dp(50)
+                md_bg_color: (1, 0, 0, 1)
+                on_release: root.ajustar_potencia(5)
+
+        ScrollView:
+            MDList:
+                id: lista_datos
+
+        MDRaisedButton:
+            text: "Volver al Inicio"
+            size_hint: None, None
+            size: dp(200), dp(50)
+            pos_hint: {'center_x': 0.5}
+            on_release: app.root.current = 'inicio'
